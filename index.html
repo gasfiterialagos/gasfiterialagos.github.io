@@ -250,7 +250,8 @@ section{padding-block:clamp(72px,10vw,128px);position:relative}
 .price h3{font-size:2rem}
 .amount{display:flex;align-items:flex-start;gap:4px;font:900 4.4rem/.9 var(--display);font-variant-numeric:tabular-nums}
 .amount sup{font-size:1.6rem;margin-top:.35rem;color:var(--muted)}
-.amount small{align-self:flex-end;font:500 .8rem/1 var(--mono);color:var(--dim);margin:0 0 .6rem 6px}
+.amount small{align-self:flex-end;font:700 .78rem/1 var(--mono);letter-spacing:.08em;color:var(--blue2);margin:0 0 .7rem 10px}
+.result .rec b em{display:block;font:700 .62rem/1.2 var(--mono);letter-spacing:.08em;color:var(--dim);font-style:normal;text-transform:uppercase;text-align:right;margin-top:4px}
 .price ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;color:var(--muted);font-size:.97rem}
 .price li{display:flex;gap:10px;align-items:flex-start}
 .price li svg{width:18px;height:18px;flex:none;margin-top:3px;color:var(--blue)}
@@ -468,9 +469,9 @@ footer a{color:var(--muted)}
           <p id="r-text">Selecciona uno o más síntomas de la lista y verás aquí nuestra recomendación.</p>
           <div class="gas"><b>Si huele a gas:</b> cierra la llave del gas, abre las ventanas, no enciendas luces ni artefactos y llama a un técnico autorizado.</div>
           <div class="recs">
-            <div class="rec" data-k="diag"><span>Visita de diagnóstico<small>Se descuenta si haces el trabajo</small></span><b>$20.000</b></div>
-            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro natural</small></span><b>$60.000</b></div>
-            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro forzado</small></span><b>$70.000</b></div>
+            <div class="rec" data-k="diag"><span>Visita de diagnóstico<small>Se descuenta si haces el trabajo</small></span><b>$20.000<em>valor total</em></b></div>
+            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro natural</small></span><b>$60.000<em>valor total</em></b></div>
+            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro forzado</small></span><b>$70.000<em>valor total</em></b></div>
           </div>
           <a class="btn btn-wa" id="r-btn" href="#agendar"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar visita</a>
         </aside>
@@ -531,7 +532,7 @@ footer a{color:var(--muted)}
         <article class="price rv">
           <span class="kind">Para fallas</span>
           <h3>Visita de diagnóstico</h3>
-          <div class="amount"><sup>$</sup>20.000</div>
+          <div class="amount"><sup>$</sup>20.000<small>VALOR TOTAL</small></div>
           <ul>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Evaluamos el equipo e identificamos la falla</li>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Definimos reparación o mantención</li>
@@ -544,7 +545,7 @@ footer a{color:var(--muted)}
           <span class="ribbon">MÁS PEDIDA</span>
           <span class="kind">Mantención profunda</span>
           <h3>Tiro natural</h3>
-          <div class="amount"><sup>$</sup>60.000</div>
+          <div class="amount"><sup>$</sup>60.000<small>VALOR TOTAL</small></div>
           <ul>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Kit de desgaste incluido*</li>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Desarme y limpieza completa</li>
@@ -557,7 +558,7 @@ footer a{color:var(--muted)}
         <article class="price rv">
           <span class="kind">Mantención profunda</span>
           <h3>Tiro forzado</h3>
-          <div class="amount"><sup>$</sup>70.000</div>
+          <div class="amount"><sup>$</sup>70.000<small>VALOR TOTAL</small></div>
           <ul>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Kit de desgaste incluido*</li>
             <li><svg aria-hidden="true"><use href="#ok"/></svg>Desarme y limpieza completa</li>
