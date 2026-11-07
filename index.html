@@ -3,9 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" href="img/logo.png">
 <title>Gasfitería Lagos</title>
 <meta name="description" content="Servicio técnico de calefones a domicilio en Concepción, Talcahuano, San Pedro de la Paz y Chiguayante. Instalador de gas autorizado SEC Clase 3. Garantía escrita de 3 meses.">
+<meta name="theme-color" content="#060B15">
+<!-- Vista previa al compartir el link (WhatsApp, Facebook, Instagram).
+     Si tu web queda en otra dirección (por ejemplo www.gasfiterialagos.cl), cambia "https://gasfiterialagos.github.io" en las 3 líneas de abajo. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="Gasfitería Lagos">
+<meta property="og:title" content="Gasfitería Lagos · Servicio técnico de calefones a domicilio">
+<meta property="og:description" content="Diagnóstico, reparación, mantención y cambio de calefón en Concepción y alrededores. Instalador SEC Clase 3 · Garantía escrita de 3 meses.">
+<meta property="og:url" content="https://gasfiterialagos.github.io/">
+<meta property="og:image" content="https://gasfiterialagos.github.io/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://gasfiterialagos.github.io/">
+<!-- Ficha para Google: le dice a Google qué servicio das y en qué comunas -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "Gasfitería Lagos",
+  "description": "Servicio técnico de calefones a domicilio: diagnóstico, reparación, mantención y cambio de calefón. Instalador de gas autorizado SEC Clase 3.",
+  "url": "https://gasfiterialagos.github.io/",
+  "image": "https://gasfiterialagos.github.io/img/og.jpg",
+  "logo": "https://gasfiterialagos.github.io/img/logo.png",
+  "telephone": "+56993992990",
+  "priceRange": "$20.000 - $70.000",
+  "areaServed": [
+    {"@type": "City", "name": "Concepción"},
+    {"@type": "City", "name": "Talcahuano"},
+    {"@type": "City", "name": "San Pedro de la Paz"},
+    {"@type": "City", "name": "Chiguayante"}
+  ],
+  "address": {"@type": "PostalAddress", "addressLocality": "Concepción", "addressRegion": "Biobío", "addressCountry": "CL"},
+  "sameAs": ["https://www.instagram.com/gasfiterialagos"],
+  "makesOffer": [
+    {"@type": "Offer", "name": "Visita de diagnóstico", "price": "20000", "priceCurrency": "CLP"},
+    {"@type": "Offer", "name": "Mantención profunda calefón tiro natural", "price": "60000", "priceCurrency": "CLP"},
+    {"@type": "Offer", "name": "Mantención profunda calefón tiro forzado", "price": "70000", "priceCurrency": "CLP"}
+  ]
+}
+</script>
+<!-- PÍXEL DE META (Facebook/Instagram Ads)
+     1. En el Administrador de eventos de Meta, crea un píxel y copia su número (ID).
+     2. Reemplaza TU_PIXEL_ID por ese número y borra las líneas "INICIO COMENTARIO" y "FIN COMENTARIO".
+     Cada clic en un botón de WhatsApp se registrará como evento "Contact".
+INICIO COMENTARIO
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','TU_PIXEL_ID'); fbq('track','PageView');
+</script>
+FIN COMENTARIO -->
+<link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
@@ -284,7 +335,57 @@ footer a{color:var(--muted)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55),0 10px 30px rgba(0,0,0,.5)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0),0 10px 30px rgba(0,0,0,.5)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0),0 10px 30px rgba(0,0,0,.5)}}
 @media (max-width:900px){.float{display:grid}}
 
+/* agendamiento */
+.book{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
+.book-side{display:flex;flex-direction:column;gap:22px;position:sticky;top:110px}
+.book-side ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;color:var(--muted)}
+.book-side li{display:flex;gap:12px}
+.book-side li svg{width:20px;height:20px;color:var(--blue);flex:none;margin-top:3px}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:30px;border-radius:24px;background:var(--panel);border:1px solid var(--line2)}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field.full{grid-column:1/-1}
+.field>label,.field>.lab{font:700 .74rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field>label i,.field>.lab i{font-style:normal;color:var(--flame)}
+.form input[type=text],.form input[type=date],.form select,.form textarea{width:100%;min-height:52px;padding:12px 14px;border-radius:12px;border:1px solid var(--line2);background:var(--bg);color:var(--fg);font:500 1rem/1.3 var(--body);transition:border-color .2s,box-shadow .2s}
+.form textarea{min-height:92px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(77,168,255,.2)}
+.form .bad-field{border-color:var(--red)!important}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{min-height:46px;padding:0 16px;display:inline-flex;align-items:center;border-radius:999px;border:1px solid var(--line2);cursor:pointer;font-weight:600;color:var(--muted);transition:.2s}
+.seg input:checked+label{background:var(--blue);border-color:var(--blue);color:var(--bg)}
+.seg input:focus-visible+label{outline:2px solid var(--amber);outline-offset:2px}
+.form .send{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding-top:6px}
+.form .send p{color:var(--dim);font-size:.85rem;max-width:42ch}
+.form .err{grid-column:1/-1;color:var(--red);font-weight:600;font-size:.92rem}
+.preview{grid-column:1/-1;padding:14px 16px;border-radius:12px;background:#0B1E14;border:1px solid rgba(37,211,102,.35);font:500 .85rem/1.5 var(--mono);color:#BFEFD0;white-space:pre-wrap;word-break:break-word}
+.preview b{display:block;font:700 .7rem/1 var(--mono);letter-spacing:.1em;color:var(--wa);margin-bottom:8px}
+@media (max-width:900px){.book{grid-template-columns:1fr}.book-side{position:static}}
+@media (max-width:560px){.form{grid-template-columns:1fr;padding:20px}}
 
+/* reseñas (se activa cuando haya reseñas reales) */
+.reviews{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.review{display:flex;flex-direction:column;gap:14px;padding:26px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.review .rec-badge{align-self:flex-start;padding:6px 12px;border-radius:999px;background:rgba(77,168,255,.12);border:1px solid rgba(77,168,255,.35);color:var(--blue2);font:700 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.review p{font-size:1.02rem;line-height:1.55}
+.review footer b{font-family:var(--body);font-size:.95rem;color:var(--fg)}
+.review .verify{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font:600 .88rem/1.3 var(--body);color:var(--blue2);text-decoration:none}
+.review .verify:hover{text-decoration:underline}
+.review p{color:var(--fg)}
+.review footer{padding:0;border:0;font:500 .8rem/1.4 var(--mono);color:var(--dim)}
+.review footer b{color:var(--muted)}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}}
+@media (min-width:901px){.reviews .review:nth-child(1),.reviews .review:nth-child(2){grid-column:span 1}}
+
+/* antes y después (se activa cuando haya fotos) */
+.ba{position:relative;max-width:900px;margin:0 auto;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:var(--panel);user-select:none;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .after{clip-path:inset(0 0 0 var(--pos,50%))}
+.ba .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:#fff;translate:-1px 0;pointer-events:none}
+.ba .handle::after{content:"⇆";position:absolute;top:50%;left:50%;translate:-50% -50%;width:48px;height:48px;border-radius:50%;background:#fff;color:var(--bg);display:grid;place-items:center;font-size:1.3rem;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.ba .tagb{position:absolute;top:16px;padding:6px 12px;border-radius:999px;background:rgba(6,11,21,.8);font:700 .72rem/1 var(--mono);letter-spacing:.1em}
+.ba .tagb.l{left:16px}.ba .tagb.r{right:16px;color:var(--blue2)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
 </style>
 </head>
 <body>
@@ -305,6 +406,7 @@ footer a{color:var(--muted)}
       <a href="#tarifas">Tarifas</a>
       <a href="#garantia">Garantía</a>
       <a href="#trabajos">Trabajos</a>
+      <a href="#agendar">Agendar</a>
     </nav>
     <a class="btn btn-wa" data-wa href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg><span>Agendar visita</span></a>
   </div>
@@ -501,6 +603,38 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
+  <!-- ANTES Y DESPUÉS: para activarlo, pon tus fotos como img/antes.jpg e img/despues.jpg (mismo ángulo) y borra la palabra "hidden" de la línea de abajo -->
+  <section id="antes-despues" hidden>
+    <div class="wrap">
+      <div class="head rv"><span class="label">Antes y después</span><h2>Desliza y compara</h2><p class="lead">El mismo quemador, antes y después de nuestra mantención.</p></div>
+      <div class="ba rv" id="ba">
+        <img data-src="img/antes.jpg" alt="Quemador antes de la mantención">
+        <img class="after" data-src="img/despues.jpg" alt="Quemador después de la mantención">
+        <span class="tagb l">ANTES</span><span class="tagb r">DESPUÉS</span>
+        <div class="handle"></div>
+        <input type="range" id="ba-range" min="0" max="100" value="50" aria-label="Comparar antes y después">
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS reales, tomadas de Facebook (página y comentarios de la publicación del 24-07-2025) -->
+  <section id="resenas">
+    <div class="wrap">
+      <div class="head split rv">
+        <div style="display:flex;flex-direction:column;gap:18px"><span class="label">Reseñas</span><h2>Lo que dicen nuestros clientes</h2></div>
+        <p class="lead">Opiniones reales de clientes en nuestra página de Facebook. <a href="https://www.facebook.com/profile.php?id=61551989211386&amp;sk=reviews" target="_blank" rel="noopener">Ver en Facebook</a></p>
+      </div>
+      <div class="reviews">
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Excelente el servicio que entrega. Muy profesional y cuenta con información actualizada. Demuestra dedicación y se toma su tiempo para realizar su trabajo, aparte que explica en detalle los procedimientos. Lo recomiendo con toda seguridad.”</p><footer><b>Vale M.</b></footer><a class="verify" href="https://www.facebook.com/permalink.php?story_fbid=pfbid0y6ueRiqH5sCECebVo4NaFbfKiCfPq7xReTWKjBFDiA5HxMfZcCEcveYz9m366aA2l&amp;id=61551989211386" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Recomiendo con toda seguridad el servicio de mantención que realiza este joven. Lo que cobra está acorde con el trabajo, la dedicación y el tiempo que se toma en toda la actividad. Espero que con el tiempo no se contagie con las malas prácticas que realizan algunos de sus colegas.”</p><footer><b>Erick E.</b> · Mantención</footer><a class="verify" href="https://www.facebook.com/permalink.php?story_fbid=pfbid0y6ueRiqH5sCECebVo4NaFbfKiCfPq7xReTWKjBFDiA5HxMfZcCEcveYz9m366aA2l&amp;id=61551989211386" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Excelente servicio, muy confiable, recomendable.”</p><footer><b>Paola H.</b> · Marzo 2026</footer><a class="verify" href="https://www.facebook.com/profile.php?id=61551989211386&amp;sk=reviews" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Excelente servicio, es un joven muy profesional. 100% recomendable.”</p><footer><b>Anita T.</b></footer><a class="verify" href="https://www.facebook.com/permalink.php?story_fbid=pfbid0y6ueRiqH5sCECebVo4NaFbfKiCfPq7xReTWKjBFDiA5HxMfZcCEcveYz9m366aA2l&amp;id=61551989211386" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Se recomienda. Muy dedicado en su oficio.”</p><footer><b>Virginia R.</b></footer><a class="verify" href="https://www.facebook.com/permalink.php?story_fbid=pfbid0y6ueRiqH5sCECebVo4NaFbfKiCfPq7xReTWKjBFDiA5HxMfZcCEcveYz9m366aA2l&amp;id=61551989211386" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+        <article class="review rv"><span class="rec-badge">Recomienda · Facebook</span><p>“Excelente servicio, lo recomiendo.”</p><footer><b>Carolina M.</b></footer><a class="verify" href="https://www.facebook.com/permalink.php?story_fbid=pfbid0y6ueRiqH5sCECebVo4NaFbfKiCfPq7xReTWKjBFDiA5HxMfZcCEcveYz9m366aA2l&amp;id=61551989211386" target="_blank" rel="noopener">Ver recomendación en Facebook ↗</a></article>
+      </div>
+    </div>
+  </section>
+
   <section id="garantia" style="background:var(--bg2);border-block:1px solid var(--line)">
     <div class="wrap war">
       <div class="seal rv">
@@ -516,6 +650,76 @@ footer a{color:var(--muted)}
         </div>
         <p class="fine" style="margin:0">Lo no cubierto se informa y autoriza antes de hacerlo. Las condiciones inseguras deben corregirse antes de usar el equipo. Esta garantía comercial no limita los derechos del consumidor.</p>
       </div>
+    </div>
+  </section>
+
+  <section id="agendar">
+    <div class="wrap book">
+      <div class="book-side rv">
+        <span class="label">Agenda tu visita</span>
+        <h2>Reserva en 1 minuto</h2>
+        <p class="lead">Completa los datos y te llegará todo listo en un mensaje de WhatsApp. Te confirmamos el día y la hora por ahí.</p>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Sin registro ni pagos en línea</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Presupuesto cerrado antes de trabajar</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Garantía escrita de 3 meses</li>
+        </ul>
+      </div>
+      <form class="form rv" id="book" novalidate>
+        <div class="field full">
+          <span class="lab">Servicio <i>*</i></span>
+          <div class="seg" role="radiogroup" aria-label="Servicio">
+            <input type="radio" name="svc" id="svc1" value="Visita de diagnóstico (falla)"><label for="svc1">Tengo una falla</label>
+            <input type="radio" name="svc" id="svc2" value="Mantención profunda"><label for="svc2">Mantención</label>
+            <input type="radio" name="svc" id="svc3" value="Cambio de calefón"><label for="svc3">Cambio de calefón</label>
+          </div>
+        </div>
+        <div class="field full">
+          <span class="lab">Tipo de calefón</span>
+          <div class="seg" role="radiogroup" aria-label="Tipo de calefón">
+            <input type="radio" name="tiro" id="tiro1" value="Tiro natural"><label for="tiro1">Tiro natural</label>
+            <input type="radio" name="tiro" id="tiro2" value="Tiro forzado"><label for="tiro2">Tiro forzado</label>
+            <input type="radio" name="tiro" id="tiro3" value="No sé (envío foto)" checked><label for="tiro3">No sé</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="b-name">Nombre <i>*</i></label>
+          <input type="text" id="b-name" autocomplete="name" placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label for="b-brand">Marca del calefón</label>
+          <input type="text" id="b-brand" placeholder="Ej: Splendid, Junkers…">
+        </div>
+        <div class="field">
+          <label for="b-com">Comuna <i>*</i></label>
+          <select id="b-com">
+            <option value="">Elige tu comuna</option>
+            <option>Concepción</option><option>Talcahuano</option><option>San Pedro de la Paz</option><option>Chiguayante</option><option>Otra (alrededores)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="b-sector">Sector o referencia</label>
+          <input type="text" id="b-sector" placeholder="Ej: Lomas de San Andrés">
+        </div>
+        <div class="field">
+          <label for="b-date">Día preferido</label>
+          <input type="date" id="b-date">
+        </div>
+        <div class="field">
+          <label for="b-time">Horario preferido</label>
+          <select id="b-time"><option>Cualquier horario</option><option>Mañana</option><option>Tarde</option></select>
+        </div>
+        <div class="field full">
+          <label for="b-note">¿Qué le pasa al calefón?</label>
+          <textarea id="b-note" placeholder="Ej: se apaga solo cuando me ducho"></textarea>
+        </div>
+        <div class="preview" id="b-prev" aria-live="polite"><b>VISTA PREVIA DEL MENSAJE</b><span id="b-prev-txt"></span></div>
+        <p class="err" id="b-err" hidden>Completa el servicio, tu nombre y tu comuna para enviar.</p>
+        <div class="send">
+          <p>Se abrirá WhatsApp con este mensaje. Solo tienes que tocar enviar.</p>
+          <a class="btn btn-wa" id="b-send" href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -560,6 +764,61 @@ footer a{color:var(--muted)}
     var m = a.getAttribute("data-wa") || DEFAULT_MSG;
     a.href = WA + encodeURIComponent(m);
   });
+
+  // píxel de Meta: cada clic a WhatsApp cuenta como contacto (solo si el píxel está activado)
+  document.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest('a[href^="https://wa.me/"]');
+    if (a && window.fbq) window.fbq("track", "Contact");
+  });
+
+  // ---------- agendamiento ----------
+  (function(){
+    var f = document.getElementById("book"); if (!f) return;
+    var $ = function(id){ return document.getElementById(id); };
+    var send = $("b-send"), err = $("b-err"), prev = $("b-prev-txt");
+    var d = $("b-date"), today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    d.min = today.toISOString().slice(0, 10);
+    function val(name){ var r = f.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
+    function fmtDate(v){ if (!v) return ""; var p = v.split("-"); var dt = new Date(+p[0], +p[1] - 1, +p[2]);
+      return dt.toLocaleDateString("es-CL", {weekday:"long", day:"numeric", month:"long"}); }
+    function build(){
+      var lines = ["Hola, quiero agendar una visita."];
+      var svc = val("svc"), tiro = val("tiro");
+      if (svc) lines.push("• Servicio: " + svc);
+      if (tiro) lines.push("• Calefón: " + tiro + ($("b-brand").value.trim() ? " · " + $("b-brand").value.trim() : ""));
+      if ($("b-note").value.trim()) lines.push("• Problema: " + $("b-note").value.trim());
+      var lugar = [$("b-com").value, $("b-sector").value.trim()].filter(Boolean).join(", ");
+      if (lugar) lines.push("• Comuna: " + lugar);
+      var cuando = [fmtDate(d.value), $("b-time").value !== "Cualquier horario" ? $("b-time").value.toLowerCase() : ""].filter(Boolean).join(", ");
+      lines.push("• Preferencia: " + (cuando || "cualquier día"));
+      if ($("b-name").value.trim()) lines.push("Mi nombre es " + $("b-name").value.trim() + ".");
+      return lines.join("\n");
+    }
+    function refresh(){
+      var msg = build(); prev.textContent = msg;
+      send.href = "https://wa.me/56993992990?text=" + encodeURIComponent(msg);
+      if (!err.hidden) check();
+    }
+    function check(){
+      var ok = true;
+      [["b-name", !!$("b-name").value.trim()], ["b-com", !!$("b-com").value]].forEach(function(x){ $(x[0]).classList.toggle("bad-field", !x[1]); ok = ok && x[1]; });
+      ok = ok && !!val("svc");
+      err.hidden = ok; return ok;
+    }
+    f.addEventListener("input", refresh); f.addEventListener("change", refresh);
+    f.addEventListener("submit", function(e){ e.preventDefault(); });
+    send.addEventListener("click", function(e){ if (!check()) { e.preventDefault(); err.scrollIntoView({block:"center", behavior:"smooth"}); } });
+    refresh();
+  })();
+
+  // ---------- antes y después ----------
+  (function(){
+    var sec = document.getElementById("antes-despues"); if (!sec || sec.hidden) return;
+    sec.querySelectorAll("img[data-src]").forEach(function(i){ i.src = i.getAttribute("data-src"); });
+    var ba = document.getElementById("ba"), r = document.getElementById("ba-range");
+    function set(){ ba.style.setProperty("--pos", r.value + "%"); }
+    r.addEventListener("input", set); set();
+  })();
 
   // header background after scroll
   var top = document.getElementById("top");
