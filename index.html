@@ -153,7 +153,14 @@ section{padding-block:clamp(72px,10vw,128px);position:relative}
 .result h3{font-size:2.1rem}
 .result p{color:var(--muted)}
 .result .rec{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
-.result .rec b{font:900 2rem/1 var(--display);color:var(--flame)}
+.result .rec b{font:900 1.7rem/1 var(--display);color:var(--flame);white-space:nowrap}
+.recs{display:flex;flex-direction:column;gap:8px}
+.result .rec{align-items:center;transition:opacity .3s,border-color .3s,background .3s;position:relative}
+.result .rec span{font-weight:600}
+.result .rec small{display:block;font:500 .72rem/1.3 var(--mono);color:var(--dim);letter-spacing:.04em}
+.result .rec.off{opacity:.45}
+.result .rec.on{border-color:var(--blue);background:rgba(77,168,255,.08)}
+.result .rec.on::before{content:"RECOMENDADO";position:absolute;top:-9px;left:14px;padding:3px 8px;border-radius:999px;background:var(--blue);color:var(--bg);font:700 .62rem/1 var(--mono);letter-spacing:.1em}
 .result .gas{display:none;padding:14px 16px;border-radius:12px;background:rgba(255,93,77,.1);border:1px solid rgba(255,93,77,.5);color:var(--fg);font-size:.95rem}
 .result[data-gas="1"] .gas{display:block}
 @media (max-width:900px){.diag{grid-template-columns:1fr}.result{position:static}}
@@ -367,7 +374,11 @@ footer a{color:var(--muted)}
           <h3 id="r-title">Marca lo que notas</h3>
           <p id="r-text">Selecciona uno o más síntomas de la lista y verás aquí nuestra recomendación.</p>
           <div class="gas"><b>Si huele a gas:</b> cierra la llave del gas, abre las ventanas, no enciendas luces ni artefactos y llama a un técnico autorizado.</div>
-          <div class="rec"><span id="r-svc">Mantención preventiva</span><b id="r-price">$60.000</b></div>
+          <div class="recs">
+            <div class="rec" data-k="diag"><span>Visita de diagnóstico<small>Se descuenta si haces el trabajo</small></span><b>$20.000</b></div>
+            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro natural</small></span><b>$60.000</b></div>
+            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro forzado</small></span><b>$70.000</b></div>
+          </div>
           <a class="btn btn-wa" id="r-btn" href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Enviar por WhatsApp</a>
         </aside>
       </div>
@@ -601,7 +612,11 @@ footer a{color:var(--muted)}
     var o = OUT[lvl];
     res.dataset.level = lvl; res.dataset.gas = sel.some(function(s){return s.id==="gas";}) ? "1" : "0";
     el("r-lvl").textContent = o.l; el("r-title").textContent = o.h; el("r-text").textContent = o.p;
-    el("r-svc").textContent = o.s; el("r-price").textContent = o.pr;
+    var recK = lvl === 0 ? null : (lvl === 1 ? "mant" : "diag");
+    document.querySelectorAll("#result .rec").forEach(function(r){
+      r.classList.toggle("on", r.dataset.k === recK);
+      r.classList.toggle("off", !!recK && r.dataset.k !== recK);
+    });
     var msg = sel.length
       ? "Hola, quiero agendar una visita. Mi calefón:\n" + sel.map(function(s){ return "• " + s.t; }).join("\n") + "\nMi sector es: "
       : DEFAULT_MSG;
@@ -613,46 +628,83 @@ footer a{color:var(--muted)}
   // ---------- llama azul (canvas) ----------
   var cv = document.getElementById("flame"), ctx = cv.getContext("2d");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2),P=[],mode="ok";
+  var W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2),mode="ok";
   function size(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
   size(); window.addEventListener("resize", size);
-  function spawn(){
-    var base = H*0.84, x0 = W*0.14, x1 = W*0.86;
-    var x = x0 + Math.random()*(x1-x0);
-    var bad = mode!=="ok";
-    P.push({x:x, y:base, vx:(Math.random()-.5)*(bad?.9:.25), vy:-(bad?(1.1+Math.random()*1.8):(0.6+Math.random()*1.1)), life:0, max:(bad?55:38)+Math.random()*30, r:(bad?6:4)+Math.random()*7, ph:Math.random()*6});
+  if (window.ResizeObserver) new ResizeObserver(function(){ size(); if (reduce) still(); }).observe(cv);
+  // vuelve a encender cuando la ventana del calefón entra en pantalla
+  if (window.IntersectionObserver) new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && !reduce) ign0 = -1; }); }, {threshold:.4}).observe(cv);
+  // Hilera de llamas del quemador: encendido con chispa, de izquierda a derecha, luego llama estable
+  var ign0 = -1, N = 12;
+  var J = []; for (var q=0;q<N;q++) J.push({p1:Math.random()*6.28, p2:Math.random()*6.28, s:0.9+Math.random()*0.2});
+  function flamePath(x, base, w, h, sway){
+    ctx.beginPath();
+    ctx.moveTo(x - w/2, base);
+    ctx.bezierCurveTo(x - w*0.62, base - h*0.45, x - w*0.18 + sway*0.5, base - h*0.8, x + sway, base - h);
+    ctx.bezierCurveTo(x + w*0.18 + sway*0.5, base - h*0.8, x + w*0.62, base - h*0.45, x + w/2, base);
+    ctx.closePath();
   }
-  function frame(t){
-    ctx.globalCompositeOperation="source-over";
-    ctx.fillStyle="rgba(3,6,13,0.32)"; ctx.fillRect(0,0,W,H);
-    ctx.globalCompositeOperation="lighter";
-    for(var i=0;i<9;i++) spawn();
-    for(var j=P.length-1;j>=0;j--){
-      var p=P[j]; p.life++;
-      p.x += p.vx + Math.sin(t/260 + p.ph + p.y/30)*.18; p.y += p.vy;
-      var k = p.life/p.max; if(k>=1){P.splice(j,1);continue;}
-      var r = p.r*(1-k*.6);
-      var g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*2.2);
-      var a = (1-k)*0.55;
-      if(mode==="ok"){
-        if(k<0.25){ g.addColorStop(0,"rgba(220,240,255,"+a+")"); g.addColorStop(.4,"rgba(90,170,255,"+a*.8+")"); }
-        else { g.addColorStop(0,"rgba(80,160,255,"+a*.8+")"); g.addColorStop(.5,"rgba(40,90,220,"+a*.4+")"); }
-        g.addColorStop(1,"rgba(20,40,120,0)");
-      } else {
-        if(k<0.3){ g.addColorStop(0,"rgba(255,240,200,"+a+")"); g.addColorStop(.4,"rgba(255,190,60,"+a*.8+")"); }
-        else { g.addColorStop(0,"rgba(255,150,40,"+a*.8+")"); g.addColorStop(.5,"rgba(220,80,20,"+a*.4+")"); }
-        g.addColorStop(1,"rgba(120,30,0,0)");
+  function frame(now){
+    if (cv.clientWidth !== W || cv.clientHeight !== H) size();
+    if (!W || !H) { ign0 = -1; if (!reduce) requestAnimationFrame(frame); return; }
+    if (ign0 < 0) ign0 = now;
+    var t = (now - ign0) / 1000;           // segundos desde el encendido
+    var bad = mode !== "ok";
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = "#03060D"; ctx.fillRect(0, 0, W, H);
+    var base = H * 0.835, x0 = W * 0.17, x1 = W * 0.83, gap = (x1 - x0) / (N - 1);
+    var jetW = gap * 0.78, baseH = H * (bad ? 0.30 : 0.16);
+    var lit = 0;
+    // chispa del electrodo (0.25 s a 0.75 s)
+    if (t > 0.25 && t < 0.75) {
+      ctx.globalCompositeOperation = "lighter";
+      for (var s = 0; s < 3; s++) {
+        var sx = x0 - gap * 0.6 + (Math.random() - .5) * 6, sy = base - 10 - Math.random() * 16;
+        ctx.strokeStyle = "rgba(220,240,255," + (0.5 + Math.random() * .5) + ")"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.moveTo(x0 - gap * 0.6, base - 4);
+        ctx.lineTo(sx + (Math.random() - .5) * 8, (base + sy) / 2); ctx.lineTo(sx, sy); ctx.stroke();
       }
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,r*2.2,0,6.283); ctx.fill();
+      var fl = ctx.createRadialGradient(x0 - gap * .6, base - 14, 0, x0 - gap * .6, base - 14, 30);
+      fl.addColorStop(0, "rgba(200,230,255,.6)"); fl.addColorStop(1, "rgba(200,230,255,0)");
+      ctx.fillStyle = fl; ctx.fillRect(x0 - gap * .6 - 30, base - 44, 60, 60);
     }
-    // glow on the burner
-    var gl = ctx.createLinearGradient(0,H*.86,0,H*.70);
-    var gc = mode==="ok" ? "120,190,255" : "255,170,60";
-    gl.addColorStop(0,"rgba("+gc+",.18)"); gl.addColorStop(1,"rgba("+gc+",0)");
-    ctx.fillStyle=gl; ctx.fillRect(W*.1,H*.70,W*.8,H*.16);
-    if(!reduce) requestAnimationFrame(frame);
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < N; i++) {
+      var on = (t - 0.6 - i * 0.07) / 0.35;  // cada quemador prende un poco después que el anterior
+      if (on <= 0) continue;
+      var g0 = Math.min(1, on); g0 = 1 - Math.pow(1 - g0, 3); lit++;
+      var j = J[i], x = x0 + i * gap, ts = now / 1000;
+      var flick = bad
+        ? 0.75 + 0.35 * Math.sin(ts * 7 + j.p1) * Math.sin(ts * 3.1 + j.p2) + 0.15 * Math.random()
+        : 0.92 + 0.06 * Math.sin(ts * 14 + j.p1) + 0.04 * Math.sin(ts * 23 + j.p2);
+      var h = baseH * j.s * flick * g0;
+      var sway = bad ? Math.sin(ts * 2.2 + j.p1) * jetW * 0.7 : Math.sin(ts * 9 + j.p2) * jetW * 0.08;
+      // halo
+      var halo = ctx.createRadialGradient(x, base - h * .4, 0, x, base - h * .4, h * .9);
+      halo.addColorStop(0, bad ? "rgba(255,150,40,.16)" : "rgba(70,150,255,.16)"); halo.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, base - h * .4, h * .9, 0, 6.283); ctx.fill();
+      // cono exterior
+      var go = ctx.createLinearGradient(0, base, 0, base - h);
+      if (bad) { go.addColorStop(0, "rgba(255,120,30,.85)"); go.addColorStop(.35, "rgba(255,190,60,.75)"); go.addColorStop(1, "rgba(255,90,10,0)"); }
+      else     { go.addColorStop(0, "rgba(40,110,255,.9)");  go.addColorStop(.5, "rgba(60,150,255,.55)"); go.addColorStop(1, "rgba(30,80,220,0)"); }
+      ctx.fillStyle = go; flamePath(x, base, jetW, h, sway); ctx.fill();
+      // cono interior
+      var hi = h * (bad ? 0.35 : 0.42), gi = ctx.createLinearGradient(0, base, 0, base - hi);
+      if (bad) { gi.addColorStop(0, "rgba(255,245,200,.9)"); gi.addColorStop(1, "rgba(255,210,120,0)"); }
+      else     { gi.addColorStop(0, "rgba(210,240,255,.95)"); gi.addColorStop(1, "rgba(120,200,255,0)"); }
+      ctx.fillStyle = gi; flamePath(x, base, jetW * 0.5, hi, sway * 0.4); ctx.fill();
+    }
+    // resplandor sobre el quemador, crece a medida que prenden las llamas
+    if (lit) {
+      var k = lit / N, gc = bad ? "255,170,60" : "110,180,255";
+      ctx.save(); ctx.translate(W / 2, base - 6); ctx.scale(1, 0.32);
+      var gl = ctx.createRadialGradient(0, 0, 0, 0, 0, W * .48);
+      gl.addColorStop(0, "rgba(" + gc + "," + (0.28 * k) + ")"); gl.addColorStop(1, "rgba(" + gc + ",0)");
+      ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(0, 0, W * .48, 0, 6.283); ctx.fill(); ctx.restore();
+    }
+    if (!reduce) requestAnimationFrame(frame);
   }
-  function still(){ P=[]; for(var n=0;n<60;n++) frame(n*16); }
+  function still(){ ign0 = 0; frame(5000); }
   if(reduce){ still(); } else requestAnimationFrame(frame);
 
   var win=el("win"), bOk=el("b-ok"), bBad=el("b-bad");
@@ -663,7 +715,7 @@ footer a{color:var(--muted)}
   function setMode(m){
     mode=m; win.dataset.mode=m; bOk.setAttribute("aria-pressed",m==="ok"); bBad.setAttribute("aria-pressed",m!=="ok");
     var t=TXT[m]; el("f-tag").textContent=t.tag; el("f-col").textContent=t.col; el("f-mean").textContent=t.mean; el("f-note").innerHTML=t.note;
-    if(reduce) still();
+    if(reduce) still(); else ign0 = -1;
   }
   bOk.addEventListener("click",function(){setMode("ok");}); bBad.addEventListener("click",function(){setMode("bad");});
 })();
