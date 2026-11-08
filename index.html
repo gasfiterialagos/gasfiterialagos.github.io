@@ -41,7 +41,9 @@
   "address": {"@type": "PostalAddress", "addressLocality": "Concepción", "addressRegion": "Biobío", "addressCountry": "CL"},
   "sameAs": ["https://www.instagram.com/gasfiterialagos"],
   "makesOffer": [
-    {"@type": "Offer", "name": "Visita de diagnóstico", "price": "20000", "priceCurrency": "CLP"},
+    {"@type": "Offer", "name": "Visita técnica", "price": "20000", "priceCurrency": "CLP"},
+    {"@type": "Offer", "name": "Mantención preventiva calefón tiro natural", "price": "45000", "priceCurrency": "CLP"},
+    {"@type": "Offer", "name": "Mantención preventiva calefón tiro forzado", "price": "55000", "priceCurrency": "CLP"},
     {"@type": "Offer", "name": "Mantención profunda calefón tiro natural", "price": "60000", "priceCurrency": "CLP"},
     {"@type": "Offer", "name": "Mantención profunda calefón tiro forzado", "price": "70000", "priceCurrency": "CLP"}
   ]
@@ -62,7 +64,7 @@ FIN COMENTARIO -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: "la llama azul" — a calefón's viewing window as the hero; full-bleed dark bands, 1180px column, technical mono labels */
+/* Layout: oferta directa — portada con precios y foto real; bandas oscuras, columna de 1180px */
 :root{
   --bg:#060B15; --bg2:#0A1222; --panel:#0F1A2E; --line:#1E2E4A; --line2:#2B4168;
   --fg:#EEF1F6; --muted:#97A6BD; --dim:#6C7C95;
@@ -388,6 +390,146 @@ footer a{color:var(--muted)}
 .ba .tagb{position:absolute;top:16px;padding:6px 12px;border-radius:999px;background:rgba(6,11,21,.8);font:700 .72rem/1 var(--mono);letter-spacing:.1em}
 .ba .tagb.l{left:16px}.ba .tagb.r{right:16px;color:var(--blue2)}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* precios en portada */
+.hero-prices{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.hero-prices a{display:flex;flex-direction:column;gap:2px;padding:12px 18px;border-radius:14px;border:1px solid var(--line2);background:rgba(15,26,46,.7);text-decoration:none;color:var(--fg);transition:border-color .2s,transform .2s}
+.hero-prices a:hover{border-color:var(--blue);transform:translateY(-2px)}
+.hero-prices span{font:500 .72rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero-prices b{font:900 2rem/1 var(--display);color:var(--fg)}
+.hero-prices em{flex-basis:100%;font:500 .8rem/1.4 var(--mono);font-style:normal;color:var(--dim)}
+/* qué incluye (desplegable) */
+.incl{margin-top:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.incl summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;font:800 1.3rem/1.1 var(--display);text-transform:uppercase}
+.incl summary::-webkit-details-marker{display:none}
+.incl summary i{width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--line2);position:relative;transition:transform .35s var(--ease),background .35s}
+.incl summary i::before,.incl summary i::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--fg);translate:-50% -50%}
+.incl summary i::after{rotate:90deg}
+.incl[open] summary i{transform:rotate(45deg);background:var(--blue);border-color:var(--blue)}
+.incl-body{padding:0 22px 22px}
+.incl-body .steps li{padding:12px 0;font-size:.98rem}
+.kit-mini{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:14px;background:var(--fg);color:var(--bg);align-self:start}
+.kit-mini img{background:#fff;border-radius:10px;padding:10px;height:120px;width:100%;object-fit:contain}
+.kit-mini b{font:800 1.2rem/1.1 var(--display);text-transform:uppercase}
+.kit-mini p{font-size:.9rem;font-weight:600;margin-top:4px}
+@media (max-width:760px){.incl-body{grid-template-columns:1fr}}
+/* franja de garantía */
+.gband{margin-top:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 28px;align-items:center;padding:22px 24px;border-radius:16px;border:1px solid var(--blue);background:linear-gradient(90deg,rgba(77,168,255,.10),transparent 70%)}
+.gb-main{display:flex;align-items:center;gap:14px}
+.gb-main b{font:900 4.2rem/.8 var(--display);color:var(--blue)}
+.gb-main span{font:700 .78rem/1.35 var(--mono);letter-spacing:.1em;color:var(--fg)}
+.gband ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--fg);font-weight:600}
+.gband li{display:flex;gap:8px;align-items:center}
+.gband li svg{width:18px;height:18px;color:var(--blue);flex:none}
+.gband details{grid-column:1/-1;border-top:1px solid var(--line);padding-top:12px}
+.gband summary{cursor:pointer;color:var(--blue2);font-weight:600;font-size:.92rem}
+.gband details p{margin-top:10px;color:var(--muted);font-size:.9rem;line-height:1.55}
+.gband details p b{color:var(--fg)}
+@media (max-width:700px){.gband{grid-template-columns:1fr}}
+
+.hero h1{font-size:clamp(2.9rem,6.4vw,5.4rem)}
+.hero{min-height:auto;padding-block:120px 72px}
+.hero-prices small{font:700 .66rem/1 var(--mono);letter-spacing:.08em;color:var(--blue2);margin-top:4px}
+.hero-photo{margin:0;position:relative;border-radius:24px;overflow:hidden;aspect-ratio:610/650;max-width:480px;width:100%;justify-self:center;background:var(--panel);border:1px solid var(--line2)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-photo figcaption{position:absolute;left:14px;right:14px;bottom:14px;padding:12px 16px;border-radius:12px;background:rgba(6,11,21,.88);font-size:.92rem;color:var(--muted)}
+.hero-photo figcaption b{color:var(--fg)}
+@media (max-width:900px){.hero-photo{max-width:100%;aspect-ratio:16/11}}
+
+.hero-offer{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:24px;background:rgba(15,26,46,.85);border:1px solid var(--line2);box-shadow:0 30px 60px -30px rgba(0,0,0,.7);width:100%;max-width:480px;justify-self:center}
+.ho-label{font:700 .76rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue2);margin-bottom:4px}
+.ho-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;background:var(--bg);border:1px solid var(--line);text-decoration:none;color:var(--fg);transition:border-color .2s,transform .2s}
+.ho-row:hover{border-color:var(--blue);transform:translateY(-2px)}
+.ho-row.hot{border-color:var(--blue);background:linear-gradient(90deg,rgba(77,168,255,.12),var(--bg))}
+.ho-row span{font-weight:700;font-size:1.05rem;line-height:1.2}
+.ho-row small{display:block;font:500 .72rem/1.3 var(--mono);color:var(--dim);margin-top:4px;letter-spacing:.03em}
+.ho-row b{font:900 2.3rem/1 var(--display);white-space:nowrap}
+.ho-row.hot b{color:var(--blue)}
+.ho-note{font-size:.85rem;color:var(--muted);margin-top:4px}
+
+/* ===== decoración animada ===== */
+.hero{position:relative;overflow:hidden}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.hero-offer{position:relative;isolation:isolate}
+.hero-offer::before{content:"";position:absolute;inset:-1px;border-radius:25px;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0 70%,var(--blue) 80%,var(--blue2) 85%,transparent 95%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinb 4s linear infinite;z-index:-1}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spinb{to{--ang:360deg}}
+.ho-row{animation:rowIn .7s var(--ease) both}
+.ho-row:nth-of-type(1){animation-delay:.45s}.ho-row:nth-of-type(2){animation-delay:.6s}.ho-row:nth-of-type(3){animation-delay:.75s}
+@keyframes rowIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.ho-row.hot{box-shadow:0 0 0 0 rgba(77,168,255,.5);animation:rowIn .7s .6s var(--ease) both,glowp 2.6s 1.5s ease-in-out infinite}
+@keyframes glowp{50%{box-shadow:0 0 28px -4px rgba(77,168,255,.55)}}
+.btn-wa{overflow:hidden}
+.btn-wa::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,62%{left:-70%}100%{left:130%}}
+.marquee{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding-block:18px}
+.track{display:flex;width:max-content;animation:slide 38s linear infinite}
+.track span{font:800 1.5rem/1 var(--display);text-transform:uppercase;color:var(--dim);padding:0 26px;display:flex;align-items:center;gap:52px;white-space:nowrap}
+.track span::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--blue)}
+@keyframes slide{to{transform:translateX(-50%)}}
+.mini-seal{position:relative;width:110px;height:110px;flex:none;display:grid;place-items:center}
+.mini-seal svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.mini-seal text{font:700 15px var(--mono);letter-spacing:3px;fill:var(--blue2)}
+.mini-seal b{font:900 3.4rem/1 var(--display);color:var(--blue)}
+/* portada en celular: precios justo después del texto */
+@media (max-width:900px){
+  .hero .wrap{display:flex;flex-direction:column;gap:24px}
+  .hero-copy{display:contents}
+  .hero-copy .zone{order:0}.hero h1{order:1}.hero-copy .lead{order:2}.hero-offer{order:3;max-width:100%}.hero-copy .ctas{order:4}.hero-copy .chips{order:5}
+}
+
+.fit{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line2);font:600 .88rem/1.25 var(--body);color:var(--fg)}
+.fit::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.fit.hot{border-color:var(--blue);background:rgba(77,168,255,.1)}
+.fit.hot::before{background:var(--blue)}
+.price li.kit-li{order:-1;align-items:center;gap:12px;padding:10px;border-radius:14px;background:linear-gradient(90deg,rgba(77,168,255,.22),rgba(77,168,255,.06));border:1px solid var(--blue);color:var(--fg);animation:glowp 2.6s ease-in-out infinite}
+.price li.kit-li .kit-pics{display:flex;gap:4px;flex:none;background:#fff;border-radius:10px;padding:4px}
+.price li.kit-li img{width:52px;height:60px;object-fit:contain}
+.price li.kit-li b{display:block;font:900 1.15rem/1.1 var(--display);letter-spacing:.02em;color:var(--blue2);margin-bottom:3px}
+.price li.kit-li span{font-size:.9rem;line-height:1.35}
+.price.hot ul{display:flex;flex-direction:column}
+.duo{display:flex;flex-direction:column;gap:8px}
+.duo div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:8px;border-bottom:1px dashed var(--line2)}
+.duo span{font:600 .9rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.duo b{font:900 2.9rem/1 var(--display);font-variant-numeric:tabular-nums}
+.price.hot .duo b{color:var(--blue)}
+.duo small{font:700 .72rem/1 var(--mono);letter-spacing:.1em;color:var(--blue2);text-align:right}
+
+.ho-kit{display:flex;align-items:center;gap:12px;margin-top:-4px;padding:10px 14px 10px 10px;border-radius:14px;background:linear-gradient(90deg,rgba(77,168,255,.25),rgba(77,168,255,.06));border:1px dashed var(--blue);text-decoration:none;color:var(--fg);animation:rowIn .7s .9s var(--ease) both,glowp 2.6s 1.7s ease-in-out infinite}
+.hk-pics{display:flex;gap:3px;flex:none;background:#fff;border-radius:10px;padding:4px}
+.hk-pics img{width:44px;height:50px;object-fit:contain}
+.ho-kit b{display:block;font:900 1.1rem/1.1 var(--display);letter-spacing:.03em;color:var(--blue2);margin-bottom:2px}
+.ho-kit span{font-size:.85rem;line-height:1.3}
+.ho-p{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.ho-p i{font:700 .62rem/1 var(--mono);letter-spacing:.1em;color:var(--blue2);font-style:normal;white-space:nowrap}
+
+.kitband{margin-top:18px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:26px;align-items:center;padding:22px;border-radius:20px;background:var(--fg);color:var(--bg)}
+.kb-pics{display:flex;gap:12px;justify-content:center;align-items:center;background:#fff;border-radius:14px;padding:16px;min-height:170px}
+.kb-pics img{height:140px;width:auto;max-width:48%;object-fit:contain;transition:transform .4s var(--ease)}
+.kb-pics img:hover{transform:scale(1.07) rotate(-2deg)}
+.kb-txt{display:flex;flex-direction:column;gap:12px;min-width:0}
+.kb-tag{align-self:flex-start;padding:6px 12px;border-radius:999px;background:var(--blue);color:var(--bg);font:700 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.kitband h3{color:var(--bg);font-size:2rem}
+.kb-parts{display:flex;flex-wrap:wrap;gap:8px}
+.kb-parts span{font:600 .9rem/1 var(--body);padding:9px 13px;border-radius:999px;background:#DCE2EB;color:var(--bg)}
+.kitband small{color:#4A5870;font-size:.85rem}
+@media (max-width:760px){.kitband{grid-template-columns:1fr}}
+
+.ho-row small u{text-decoration:none;color:var(--fg);font-weight:700}
+.ho-row.ho-m{align-items:center}
+.ho-two{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
+.ho-two div{display:flex;align-items:baseline;gap:8px}
+.ho-two em{font:600 .62rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-style:normal}
+.ho-two b{font:900 1.7rem/1 var(--display)}
+.ho-row.hot .ho-two b{color:var(--blue)}
+.ho-two b{font-size:2.1rem}
+.ho-two div:nth-child(2){margin-top:2px}
+.ho-two div:nth-child(2) b{font:700 .95rem/1 var(--body);color:var(--muted)}
+.ho-row.hot .ho-two div:nth-child(2) b{color:var(--blue2)}
+.ho-two div:nth-child(2) em{font-size:.58rem}
+.ho-two i{font:700 .6rem/1 var(--mono);letter-spacing:.1em;color:var(--blue2);font-style:normal;margin-top:4px}
+@media (max-width:420px){.ho-row.ho-m{flex-direction:column;align-items:stretch}.ho-two{align-items:stretch}.ho-two div{justify-content:space-between}.ho-two i{align-self:flex-end}}
 </style>
 </head>
 <body>
@@ -403,11 +545,10 @@ footer a{color:var(--muted)}
   <div class="wrap">
     <a class="brand" href="#inicio"><img src="img/logo.png" alt="Logo Gasfitería Lagos" width="44" height="44"><b>GASFITERÍA LAGOS</b></a>
     <nav class="nav" aria-label="Secciones">
-      <a href="#diagnostico">Diagnóstico</a>
-      <a href="#servicios">Servicios</a>
       <a href="#tarifas">Tarifas</a>
-      <a href="#garantia">Garantía</a>
+      <a href="#resenas">Reseñas</a>
       <a href="#trabajos">Trabajos</a>
+      <a href="#diagnostico">Diagnóstico</a>
       <a href="#agendar">Agendar</a>
     </nav>
     <a class="btn btn-wa" data-wa href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg><span>Agendar visita</span></a>
@@ -416,83 +557,146 @@ footer a{color:var(--muted)}
 
 <main id="inicio">
   <section class="hero">
+    <canvas id="fx" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-copy">
-        <span class="label fade">Servicio técnico de calefones · A domicilio</span>
-        <h1><span class="ln"><span>Tu calefón,</span></span><span class="ln"><span>con la llama</span></span><span class="ln"><span class="blue">azul.</span></span></h1>
+        <p class="zone fade">📍 <b>Concepción</b> · <b>Talcahuano</b> · <b>Hualpén</b> · <b>San Pedro de la Paz</b> · <b>Chiguayante</b></p>
+        <h1><span class="ln"><span>Servicio técnico</span></span><span class="ln"><span>de calefones</span></span><span class="ln"><span class="blue">a domicilio</span></span></h1>
         <p class="lead fade d1">Diagnóstico, reparación, mantención y cambio de calefón. Presupuesto cerrado antes de empezar y garantía de 3 meses por escrito.</p>
+
         <div class="ctas fade d2">
           <a class="btn btn-wa" data-wa href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</a>
-          <a class="btn btn-line" href="#diagnostico">Revisar mi calefón</a>
+          <a class="btn btn-line" href="#tarifas">Ver precios</a>
         </div>
         <div class="chips fade d3">
           <span class="chip"><img src="img/sec.png" alt="">Instalador de gas autorizado <b>SEC Clase 3</b></span>
           <span class="chip"><i>3</i>Meses de <b>garantía escrita</b></span>
         </div>
-        <p class="zone fade d4">📍 <b>Concepción</b> · <b>Talcahuano</b> · <b>Hualpén</b> · <b>San Pedro de la Paz</b> · <b>Chiguayante</b> y alrededores</p>
       </div>
-      <div>
-        <p class="flame-title">Mira la llama de tu calefón</p>
-        <div class="window" id="win" data-mode="ok" aria-label="Animación de la llama dentro de un calefón">
-          <div class="screen">
-            <canvas id="flame"></canvas>
-            <div class="burner"></div>
-            <span class="tag" id="f-tag">LLAMA AZUL · TODO BIEN</span>
-            <div class="read"><span>COLOR<b id="f-col">AZUL</b></span><span>QUÉ SIGNIFICA<b id="f-mean">QUEMA BIEN EL GAS</b></span></div>
-          </div>
-          <div class="knobs" aria-hidden="true"><span></span><span></span></div>
-        </div>
-        <div class="flame-toggle" role="group" aria-label="Comparar llamas">
-          <button type="button" id="b-ok" aria-pressed="true">Llama azul</button>
-          <button type="button" id="b-bad" aria-pressed="false">Llama amarilla</button>
-        </div>
-        <p class="flame-note" id="f-note">Una llama <b>azul</b> significa que el calefón quema bien el gas. Toca "Llama amarilla" para ver cuándo necesita revisión.</p>
+      <div class="hero-offer fade d2">
+        <span class="ho-label">Nuestros precios</span>
+        <a href="#tarifas" class="ho-row"><span>Visita técnica<small>Revisamos tu calefón y, si es una falla menor, la solucionamos ahí mismo</small></span><div class="ho-p"><b data-count="20000">$20.000</b><i>VALOR TOTAL</i></div></a>
+        <a href="#tarifas" class="ho-row ho-m"><span>Mantención preventiva<small>Para calefones de <u>menos de 5 años</u>. Limpieza completa, sin repuestos.</small></span><div class="ho-two"><div><em>Tiro natural</em><b data-count="45000">$45.000</b></div><div><em>Tiro forzado</em><b data-count="55000">$55.000</b></div><i>VALOR TOTAL</i></div></a>
+        <a href="#tarifas" class="ho-row ho-m hot"><span>Mantención profunda<small>Para calefones de <u>más de 5 años</u>. Incluye kit de repuestos nuevos.</small></span><div class="ho-two"><div><em>Tiro natural</em><b data-count="60000">$60.000</b></div><div><em>Tiro forzado</em><b data-count="70000">$70.000</b></div><i>VALOR TOTAL</i></div></a>
+        <a href="#tarifas" class="ho-kit"><span class="hk-pics"><img src="img/kit1.jpg" alt="Kit de repuestos de desgaste"><img src="img/kit2.jpg" alt="Flowswitch"></span><span><b>KIT DE REPUESTOS INCLUIDO</b>en la mantención profunda: membrana, sellos, microswitch y más</span></a>
+        <p class="ho-note">Repuestos mayores se cotizan aparte y solo con tu aprobación. Garantía escrita de 3 meses.</p>
       </div>
     </div>
   </section>
 
-  <section id="diagnostico">
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Diagnóstico</span><span>Reparación</span><span>Mantención profunda</span><span>Cambio de calefón</span><span>Tiro natural</span><span>Tiro forzado</span><span>Todas las marcas</span><span>Garantía escrita</span>
+      <span>Diagnóstico</span><span>Reparación</span><span>Mantención profunda</span><span>Cambio de calefón</span><span>Tiro natural</span><span>Tiro forzado</span><span>Todas las marcas</span><span>Garantía escrita</span>
+    </div>
+  </div>
+
+  <section id="tarifas">
     <div class="wrap">
       <div class="head split rv">
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <span class="label">Diagnóstico rápido</span>
-          <h2>¿Qué le pasa a tu calefón?</h2>
-        </div>
-        <p class="lead">Marca lo que notas. Te decimos qué tan urgente es, qué servicio corresponde y te dejamos el mensaje listo para WhatsApp.</p>
+        <div style="display:flex;flex-direction:column;gap:18px"><span class="label">Tarifas</span><h2>Precios claros, sin sorpresas</h2></div>
+        <p class="lead"><b style="color:var(--fg)">¿Cuál le corresponde a tu calefón?</b> Si es nuevo o tiene menos de 5 años, una <b style="color:var(--fg)">preventiva</b>. Si tiene más de 5 años, una <b style="color:var(--blue)">profunda</b>, para cambiar las piezas que ya se gastaron.</p>
       </div>
-      <div class="diag">
-        <div class="symptoms rv" id="symptoms"></div>
-        <aside class="result rv" id="result" data-level="0" data-gas="0" aria-live="polite">
-          <div class="meter" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          <span class="lvl" id="r-lvl">Sin síntomas marcados</span>
-          <h3 id="r-title">Marca lo que notas</h3>
-          <p id="r-text">Selecciona uno o más síntomas de la lista y verás aquí nuestra recomendación.</p>
-          <div class="gas"><b>Si huele a gas:</b> cierra la llave del gas, abre las ventanas, no enciendas luces ni artefactos y llama a un técnico autorizado.</div>
-          <div class="recs">
-            <div class="rec" data-k="diag"><span>Visita de diagnóstico<small>Se descuenta si haces el trabajo</small></span><b>$20.000<em>valor total</em></b></div>
-            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro natural</small></span><b>$60.000<em>valor total</em></b></div>
-            <div class="rec" data-k="mant"><span>Mantención profunda<small>Tiro forzado</small></span><b>$70.000<em>valor total</em></b></div>
+      <div class="prices">
+        <article class="price rv">
+          <span class="kind">Para fallas</span>
+          <h3>Visita técnica</h3>
+          <div class="amount"><sup>$</sup>20.000<small>VALOR TOTAL</small></div>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Revisamos el equipo e identificamos la falla</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Si es una falla menor, la solucionamos en la misma visita</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Definimos reparación o mantención</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Presupuesto cerrado antes de trabajar</li>
+          </ul>
+          <p class="note">Si apruebas el servicio, los $20.000 se descuentan completos del total. Falla menor sin repuestos: pagas solo la visita.</p>
+          <a class="btn btn-line" data-wa="Hola, quiero agendar una visita técnica para mi calefón." href="https://wa.me/56993992990" target="_blank" rel="noopener">Agendar visita técnica</a>
+        </article>
+        <article class="price rv">
+          <span class="kind">Limpieza sin repuestos</span>
+          <h3>Mantención preventiva</h3>
+          <span class="fit">Para calefones nuevos o de menos de 5 años</span>
+          <div class="duo">
+            <div><span>Tiro natural</span><b>$45.000</b></div>
+            <div><span>Tiro forzado</span><b>$55.000</b></div>
+            <small>VALOR TOTAL</small>
           </div>
-          <a class="btn btn-wa" id="r-btn" href="#agendar"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar visita</a>
-        </aside>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Desarme completo del calefón</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Limpieza de todos los componentes</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Ajuste y pruebas de funcionamiento</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Garantía 3 meses por escrito</li>
+          </ul>
+          <p class="note">No incluye repuestos. Si alguna pieza necesita cambio, te damos el precio antes y solo se cambia con tu aprobación.</p>
+          <a class="btn btn-line" data-wa="Hola, quiero agendar una mantención preventiva para mi calefón." href="https://wa.me/56993992990" target="_blank" rel="noopener">Agendar preventiva</a>
+        </article>
+        <article class="price hot rv">
+          <span class="ribbon">MÁS PEDIDA</span>
+          <span class="kind">Con kit de desgaste</span>
+          <h3>Mantención profunda</h3>
+          <span class="fit hot">Para calefones de más de 5 años</span>
+          <div class="duo">
+            <div><span>Tiro natural</span><b>$60.000</b></div>
+            <div><span>Tiro forzado</span><b>$70.000</b></div>
+            <small>VALOR TOTAL</small>
+          </div>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Todo lo de la preventiva</li>
+            <li class="kit-li"><span class="kit-pics"><img src="img/kit1.jpg" alt="Kit de repuestos de desgaste"><img src="img/kit2.jpg" alt="Flowswitch"></span><span><b>KIT DE REPUESTOS INCLUIDO*</b>Membrana, sellos, microswitch, prensaestopa y más piezas nuevas</span></li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Inspección pieza por pieza</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Informe técnico del trabajo</li>
+            <li><svg aria-hidden="true"><use href="#ok"/></svg>Garantía 3 meses por escrito</li>
+          </ul>
+          <a class="btn btn-wa" data-wa="Hola, quiero agendar una mantención profunda para mi calefón." href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar profunda</a>
+        </article>
       </div>
-    </div>
-  </section>
-
-  <section id="servicios" style="padding-top:0">
-    <div class="wrap">
-      <div class="head rv"><span class="label">Servicios</span><h2>Todo para tu calefón,<br>en tu casa</h2></div>
-      <div class="svc-grid rv">
-        <article class="svc"><span class="code">S·01</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6M11 8v6"/></svg><h3>Diagnóstico</h3><p>Evaluamos el equipo, encontramos la falla y te damos un presupuesto cerrado.</p></article>
-        <article class="svc"><span class="code">S·02</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><h3>Reparación</h3><p>Membrana, módulo de encendido, válvulas, sensores y más, con repuestos de calidad.</p></article>
-        <article class="svc"><span class="code">S·03</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg><h3>Mantención</h3><p>Desarme, limpieza profunda, ajuste y pruebas. Recomendada una vez al año.</p></article>
-        <article class="svc"><span class="code">S·04</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><h3>Cambio de calefón</h3><p>Retiro del equipo antiguo e instalación del nuevo, con conexión segura de gas y agua.</p></article>
+      <div class="kitband rv">
+        <div class="kb-pics">
+          <img src="img/kit1.jpg" alt="Repuestos del kit de desgaste" loading="lazy">
+          <img src="img/kit2.jpg" alt="Flowswitch" loading="lazy">
+        </div>
+        <div class="kb-txt">
+          <span class="kb-tag">Incluido en la mantención profunda</span>
+          <h3>Kit de repuestos de desgaste</h3>
+          <div class="kb-parts"><span>Membrana</span><span>Microswitch</span><span>Estabilizador de caudal</span><span>Prensaestopa</span><span>Sellos de agua y gas</span><span>Bujías</span></div>
+          <small>*Según compatibilidad del modelo.</small>
+        </div>
+      </div>
+      <div class="tiro rv">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M7 7c2-3 8-3 10 0M5 4c3-4 11-4 14 0"/></svg><p><b>Tiro natural</b>No tiene ventilador; los gases salen solos por el ducto.</p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 4-6 5-4s-3 4-5 4zM14 12c4 0 6 4 4 5s-4-3-4-5zM12 14c0 4-4 6-5 4s3-4 5-4zM10 12c-4 0-6-4-4-5s4 3 4 5z"/></svg><p><b>Tiro forzado</b>Tiene un ventilador que expulsa los gases; lo escuchas al encender. ¿Dudas? Mándanos una foto.</p></div>
+      </div>
+      <p class="fine">*Kit según compatibilidad del modelo. Repuestos mayores o especiales se cotizan aparte y se cambian solo con tu aprobación.</p>
+      <details class="incl rv">
+        <summary>Ver qué incluye la mantención profunda<i aria-hidden="true"></i></summary>
+        <div class="incl-body">
+          <ol class="steps">
+            <li>Desarme completo e inspección pieza por pieza.</li>
+            <li>Limpieza profunda del cuerpo de agua y gas, quemadores y serpentín.</li>
+            <li>Limpieza de contactos, bujías y sistema eléctrico y de encendido.</li>
+            <li>Revisión componente por componente y lubricación de piezas móviles.</li>
+            <li>Rearme y ajuste del equipo.</li>
+            <li>Pruebas de funcionamiento, presión y estanqueidad.</li>
+            <li>Informe técnico del trabajo realizado.</li>
+          </ol>
+        </div>
+      </details>
+      <div class="gband rv">
+        <div class="gb-main"><div class="mini-seal"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ2" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#circ2">GARANTÍA ESCRITA · INSTALADOR SEC · GARANTÍA ESCRITA · </textPath></text></svg><b>3</b></div><span>MESES DE GARANTÍA<br>POR ESCRITO</span></div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Instalador de gas autorizado SEC Clase 3</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Presupuesto cerrado antes de trabajar</li>
+          <li><svg aria-hidden="true"><use href="#ok"/></svg>Informe técnico del trabajo</li>
+        </ul>
+        <details>
+          <summary>Ver condiciones de la garantía</summary>
+          <p><b>Cubre:</b> defectos del trabajo realizado y repuestos que instalamos; si la falla está cubierta, la corregimos sin costo. <b>No cubre:</b> presión o caudal de la red, red domiciliaria, trabajos de terceros ni fallas ajenas a nuestro trabajo. <b>Cómo pedirla:</b> escríbenos por WhatsApp con la fecha del servicio, el equipo y la falla. Vigente desde la fecha del servicio. Esta garantía comercial no limita los derechos del consumidor.</p>
+        </details>
       </div>
     </div>
   </section>
 
   <!-- RESEÑAS reales, tomadas de Facebook (página y comentarios de la publicación del 24-07-2025) -->
-  <section id="resenas">
+  <section id="resenas" style="background:var(--bg2);border-block:1px solid var(--line)">
     <div class="wrap">
       <div class="head split rv">
         <div style="display:flex;flex-direction:column;gap:18px"><span class="label">Reseñas</span><h2>Lo que dicen nuestros clientes</h2></div>
@@ -509,102 +713,11 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <section style="background:var(--bg2);border-block:1px solid var(--line)">
-    <div class="wrap">
-      <div class="head rv"><span class="label">Cómo trabajamos</span><h2>De tu mensaje a la llama azul</h2></div>
-      <ol class="process rv">
-        <li><b>Nos escribes</b><span>Cuéntanos tu sector y envíanos una foto del calefón.</span></li>
-        <li><b>Visita</b><span>Vamos a tu casa y evaluamos el equipo.</span></li>
-        <li><b>Presupuesto cerrado</b><span>Sabes el precio antes de que empecemos.</span></li>
-        <li><b>Trabajo</b><span>Reparamos o hacemos la mantención, y probamos todo.</span></li>
-        <li><b>Garantía escrita</b><span>3 meses e informe técnico del trabajo.</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <section id="tarifas">
-    <div class="wrap">
-      <div class="head split rv">
-        <div style="display:flex;flex-direction:column;gap:18px"><span class="label">Tarifas</span><h2>Precios claros, sin sorpresas</h2></div>
-        <p class="lead">Si tu calefón lleva más de un año sin mantención, te recomendamos una mantención profunda.</p>
-      </div>
-      <div class="prices">
-        <article class="price rv">
-          <span class="kind">Para fallas</span>
-          <h3>Visita de diagnóstico</h3>
-          <div class="amount"><sup>$</sup>20.000<small>VALOR TOTAL</small></div>
-          <ul>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Evaluamos el equipo e identificamos la falla</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Definimos reparación o mantención</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Presupuesto cerrado antes de trabajar</li>
-          </ul>
-          <p class="note">Si apruebas el servicio, los $20.000 se descuentan completos del total. Falla menor sin repuestos: pagas solo el diagnóstico.</p>
-          <a class="btn btn-line" data-wa="Hola, quiero agendar una visita de diagnóstico para mi calefón." href="https://wa.me/56993992990" target="_blank" rel="noopener">Agendar diagnóstico</a>
-        </article>
-        <article class="price hot rv">
-          <span class="ribbon">MÁS PEDIDA</span>
-          <span class="kind">Mantención profunda</span>
-          <h3>Tiro natural</h3>
-          <div class="amount"><sup>$</sup>60.000<small>VALOR TOTAL</small></div>
-          <ul>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Kit de desgaste incluido*</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Desarme y limpieza completa</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Inspección pieza por pieza</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Ajuste y pruebas de funcionamiento</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Garantía 3 meses por escrito</li>
-          </ul>
-          <a class="btn btn-wa" data-wa="Hola, quiero agendar una mantención profunda (tiro natural)." href="https://wa.me/56993992990" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar mantención</a>
-        </article>
-        <article class="price rv">
-          <span class="kind">Mantención profunda</span>
-          <h3>Tiro forzado</h3>
-          <div class="amount"><sup>$</sup>70.000<small>VALOR TOTAL</small></div>
-          <ul>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Kit de desgaste incluido*</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Desarme y limpieza completa</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Inspección pieza por pieza</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Ajuste y pruebas de funcionamiento</li>
-            <li><svg aria-hidden="true"><use href="#ok"/></svg>Garantía 3 meses por escrito</li>
-          </ul>
-          <a class="btn btn-line" data-wa="Hola, quiero agendar una mantención profunda (tiro forzado)." href="https://wa.me/56993992990" target="_blank" rel="noopener">Agendar mantención</a>
-        </article>
-      </div>
-      <div class="tiro rv">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M7 7c2-3 8-3 10 0M5 4c3-4 11-4 14 0"/></svg><p><b>Tiro natural</b>No tiene ventilador; los gases salen solos por el ducto.</p></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M12 10c0-4 4-6 5-4s-3 4-5 4zM14 12c4 0 6 4 4 5s-4-3-4-5zM12 14c0 4-4 6-5 4s3-4 5-4zM10 12c-4 0-6-4-4-5s4 3 4 5z"/></svg><p><b>Tiro forzado</b>Tiene un ventilador que expulsa los gases; lo escuchas al encender. ¿Dudas? Mándanos una foto.</p></div>
-      </div>
-      <p class="fine">*Kit según compatibilidad del modelo. Repuestos mayores o especiales se cotizan aparte y se cambian solo con tu aprobación.</p>
-    </div>
-  </section>
-
-  <section style="background:var(--bg2);border-block:1px solid var(--line)">
-    <div class="wrap">
-      <div class="head rv"><span class="label">Mantención profunda</span><h2>Qué incluye</h2></div>
-      <div class="inc">
-        <ol class="steps rv">
-          <li>Desarme completo e inspección pieza por pieza.</li>
-          <li>Limpieza profunda del cuerpo de agua y gas, quemadores y serpentín.</li>
-          <li>Limpieza de contactos, bujías y sistema eléctrico y de encendido.</li>
-          <li>Revisión componente por componente y lubricación de piezas móviles.</li>
-          <li>Rearme y ajuste del equipo.</li>
-          <li>Pruebas de funcionamiento, presión y estanqueidad.</li>
-          <li>Informe técnico del trabajo realizado.</li>
-        </ol>
-        <aside class="kit rv">
-          <h3>Kit de desgaste incluido*</h3>
-          <div class="pics"><img src="img/kit1.jpg" alt="Repuestos del kit de desgaste"><img src="img/kit2.jpg" alt="Prensaestopa"></div>
-          <div class="parts"><span>Membrana</span><span>Microswitch</span><span>Estabilizador de caudal</span><span>Prensaestopa</span><span>Sellos de agua y gas</span><span>Bujías</span></div>
-          <small>*Según compatibilidad del modelo.</small>
-        </aside>
-      </div>
-    </div>
-  </section>
-
   <section id="trabajos">
     <div class="wrap">
       <div class="head split rv">
         <div style="display:flex;flex-direction:column;gap:18px"><span class="label">Trabajos reales en terreno</span><h2>Pieza por pieza</h2></div>
-        <p class="lead">Fotos de nuestro trabajo en casas de clientes, no imágenes de catálogo.</p>
+        <p class="lead">Fotos de nuestro trabajo en casas de clientes.</p>
       </div>
       <div class="gallery">
         <figure class="shot rv"><img src="img/foto1.jpg" alt="Cuerpo de agua desarmado" loading="lazy"><figcaption><b>Cuerpo de agua</b><span>Desarme e inspección</span></figcaption></figure>
@@ -630,20 +743,30 @@ footer a{color:var(--muted)}
     </div>
   </section>
 
-  <section id="garantia" style="background:var(--bg2);border-block:1px solid var(--line)">
-    <div class="wrap war">
-      <div class="seal rv">
-        <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="circ" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs><text><textPath href="#circ">GARANTÍA ESCRITA · GASFITERÍA LAGOS · INSTALADOR SEC ·</textPath></text></svg>
-        <div class="core"><b>3</b><span>MESES</span></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:32px">
-        <div class="head rv" style="margin:0"><span class="label">Garantía</span><h2>Respaldo por escrito</h2></div>
-        <div class="war-cols rv">
-          <div><h3><i style="background:var(--blue)"></i>Qué cubre</h3><ul><li>Defectos del trabajo realizado</li><li>Repuestos que instalamos</li><li>Si la falla está cubierta, la corregimos sin costo</li></ul></div>
-          <div><h3><i style="background:var(--red)"></i>No cubre</h3><ul><li>Presión o caudal de la red</li><li>Red domiciliaria o trabajos de terceros</li><li>Fallas ajenas a nuestro trabajo</li></ul></div>
-          <div><h3><i style="background:var(--wa)"></i>Cómo pedirla</h3><ul><li>Escríbenos por WhatsApp</li><li>Indica fecha, equipo y falla</li><li>Vigente desde la fecha del servicio</li></ul></div>
+  <section id="diagnostico" style="background:var(--bg2);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head split rv">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <span class="label">Diagnóstico rápido</span>
+          <h2>¿Qué le pasa a tu calefón?</h2>
         </div>
-        <p class="fine" style="margin:0">Lo no cubierto se informa y autoriza antes de hacerlo. Las condiciones inseguras deben corregirse antes de usar el equipo. Esta garantía comercial no limita los derechos del consumidor.</p>
+        <p class="lead">Marca lo que notas. Te decimos qué tan urgente es, qué servicio corresponde y te dejamos el mensaje listo para WhatsApp.</p>
+      </div>
+      <div class="diag">
+        <div class="symptoms rv" id="symptoms"></div>
+        <aside class="result rv" id="result" data-level="0" data-gas="0" aria-live="polite">
+          <div class="meter" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <span class="lvl" id="r-lvl">Sin síntomas marcados</span>
+          <h3 id="r-title">Marca lo que notas</h3>
+          <p id="r-text">Selecciona uno o más síntomas de la lista y verás aquí nuestra recomendación.</p>
+          <div class="gas"><b>Si huele a gas:</b> cierra la llave del gas, abre las ventanas, no enciendas luces ni artefactos y llama a un técnico autorizado.</div>
+          <div class="recs">
+            <div class="rec" data-k="diag"><span>Visita técnica<small>Falla menor: se resuelve en la visita</small></span><b>$20.000<em>valor total</em></b></div>
+            <div class="rec" data-k="prev"><span>Mantención preventiva<small>Menos de 5 años · desde</small></span><b>$45.000<em>valor total</em></b></div>
+            <div class="rec" data-k="prof"><span>Mantención profunda<small>Más de 5 años · desde</small></span><b>$60.000<em>valor total</em></b></div>
+          </div>
+          <a class="btn btn-wa" id="r-btn" href="#agendar"><svg aria-hidden="true"><use href="#wa"/></svg>Agendar visita</a>
+        </aside>
       </div>
     </div>
   </section>
@@ -664,8 +787,9 @@ footer a{color:var(--muted)}
         <div class="field full">
           <span class="lab">Servicio <i>*</i></span>
           <div class="seg" role="radiogroup" aria-label="Servicio">
-            <input type="radio" name="svc" id="svc1" value="Visita de diagnóstico (falla)"><label for="svc1">Tengo una falla</label>
-            <input type="radio" name="svc" id="svc2" value="Mantención profunda"><label for="svc2">Mantención</label>
+            <input type="radio" name="svc" id="svc1" value="Visita técnica (falla)"><label for="svc1">Tengo una falla</label>
+            <input type="radio" name="svc" id="svc2" value="Mantención preventiva"><label for="svc2">Mantención preventiva</label>
+            <input type="radio" name="svc" id="svc4" value="Mantención profunda"><label for="svc4">Mantención profunda</label>
             <input type="radio" name="svc" id="svc3" value="Cambio de calefón"><label for="svc3">Cambio de calefón</label>
           </div>
         </div>
@@ -723,9 +847,7 @@ footer a{color:var(--muted)}
       <div class="head rv"><span class="label">Preguntas frecuentes</span><h2>Lo que más nos preguntan</h2></div>
       <div class="faq rv">
         <details><summary>¿Cada cuánto hay que hacerle mantención?<i aria-hidden="true"></i></summary><p>Recomendamos una mantención preventiva cada año y una mantención profunda cada 5 años, con cambio del kit completo de repuestos de desgaste. Así se detectan a tiempo fallas como un encendido retardado o un módulo que empieza a fallar.</p></details>
-        <details><summary>¿Por qué mi calefón "explota" al encender?<i aria-hidden="true"></i></summary><p>Normalmente la chispa llega tarde y el gas acumulado se enciende de golpe. Puede ser el módulo de encendido, las bujías o suciedad. No es normal y va dañando el equipo: necesita revisión.</p></details>
-        <details><summary>¿La visita de diagnóstico se paga aparte?<i aria-hidden="true"></i></summary><p>La visita cuesta $20.000. Si apruebas la reparación o mantención, se descuenta completa del total. Si es una falla menor sin repuestos, pagas solo el diagnóstico.</p></details>
-        <details><summary>¿Cómo sé si es de tiro natural o forzado?<i aria-hidden="true"></i></summary><p>Si al encenderlo escuchas un ventilador, es de tiro forzado. Si no, es de tiro natural. Si tienes dudas, mándanos una foto por WhatsApp y te decimos.</p></details>
+        <details><summary>¿La visita técnica se paga aparte?<i aria-hidden="true"></i></summary><p>La visita cuesta $20.000. Si apruebas la reparación o mantención, se descuenta completa del total. Si es una falla menor sin repuestos, pagas solo el diagnóstico.</p></details>
         <details><summary>¿A qué comunas van?<i aria-hidden="true"></i></summary><p>Concepción, Talcahuano, Hualpén, San Pedro de la Paz, Chiguayante y alrededores. Escríbenos tu sector y coordinamos la visita.</p></details>
       </div>
     </div>
@@ -806,6 +928,29 @@ footer a{color:var(--muted)}
     r.addEventListener("input", set); set();
   })();
 
+
+  // ===== partículas de fondo en la portada =====
+  (function(){
+    var c=document.getElementById("fx"); if(!c) return; var x=c.getContext("2d"), W=0,H=0, d=Math.min(window.devicePixelRatio||1,2), P=[];
+    function size(){ var r=c.getBoundingClientRect(); W=r.width; H=r.height; c.width=W*d; c.height=H*d; x.setTransform(d,0,0,d,0,0); }
+    size(); window.addEventListener("resize",size);
+    for(var i=0;i<60;i++) P.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*2.2,s:.15+Math.random()*.5,o:Math.random()*6.28,warm:Math.random()<.25});
+    function f(t){ x.clearRect(0,0,W,H); x.globalCompositeOperation="lighter";
+      P.forEach(function(p){ p.y-=p.s/H*1.2; if(p.y<-.02){p.y=1.02;p.x=Math.random();}
+        var px=p.x*W+Math.sin(t/1400+p.o)*18, py=p.y*H, a=.25+.35*Math.sin(t/700+p.o)*Math.sin(t/700+p.o);
+        var g=x.createRadialGradient(px,py,0,px,py,p.r*6); g.addColorStop(0,p.warm?"rgba(255,170,80,"+a+")":"rgba(120,190,255,"+a+")"); g.addColorStop(1,"rgba(0,0,0,0)");
+        x.fillStyle=g; x.beginPath(); x.arc(px,py,p.r*6,0,6.283); x.fill(); });
+      requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  })();
+  // ===== precios que suben al cargar =====
+  document.querySelectorAll(".ho-row b[data-count]").forEach(function(b,i){
+    var to=+b.getAttribute("data-count"), t0=null, delay=600+i*150;
+    function step(t){ if(t0===null) t0=t; var k=Math.min(1,Math.max(0,(t-t0-delay)/900)); k=1-Math.pow(1-k,3);
+      b.textContent="$"+(Math.round(to*k/100)*100).toLocaleString("es-CL");
+      if(k<1) requestAnimationFrame(step); else b.textContent="$"+to.toLocaleString("es-CL"); }
+    requestAnimationFrame(step);
+  });
   // header background after scroll
   var top = document.getElementById("top");
   function onScroll(){ top.classList.toggle("solid", window.scrollY > 24); }
@@ -831,7 +976,13 @@ footer a{color:var(--muted)}
     {id:"apaga", t:"Se apaga solo mientras me ducho",           k:"Falla",      lvl:2},
     {id:"tibia", t:"El agua sale tibia o cambia de temperatura",k:"Falla",      lvl:2},
     {id:"ruido", t:"Hace ruidos raros o gotea",                 k:"Falla",      lvl:2},
-    {id:"anio",  t:"Lleva más de un año sin mantención",        k:"Preventivo", lvl:1}
+    {id:"anio",  t:"Lleva más de un año sin mantención",        k:"Mantención preventiva", lvl:1, plan:"prev"},
+    {id:"nuevo", t:"Es nuevo o tiene menos de 5 años",          k:"Mantención preventiva", lvl:1, plan:"prev"},
+    {id:"demora",t:"Demora más que antes en dar agua caliente", k:"Mantención preventiva", lvl:1, plan:"prev"},
+    {id:"gasta", t:"Siento que gasta más gas que antes",        k:"Mantención preventiva", lvl:1, plan:"prev"},
+    {id:"cinco", t:"Tiene más de 5 años",                       k:"Mantención profunda",   lvl:1, plan:"prof"},
+    {id:"nunca", t:"Nunca le han cambiado repuestos",           k:"Mantención profunda",   lvl:1, plan:"prof"},
+    {id:"pocaf", t:"Sale poca agua caliente o con poca presión",k:"Mantención profunda",   lvl:1, plan:"prof"}
   ];
   var box = document.getElementById("symptoms");
   var check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#060B15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
@@ -843,132 +994,36 @@ footer a{color:var(--muted)}
   var el = function(id){ return document.getElementById(id); };
   var OUT = {
     0:{l:"Sin síntomas marcados", h:"Marca lo que notas", p:"Selecciona uno o más síntomas de la lista y verás aquí nuestra recomendación.", s:"Mantención preventiva", pr:"$60.000"},
-    1:{l:"Nivel 1 · Preventivo", h:"Toca mantención", p:"Tu calefón funciona, pero ya le corresponde su mantención anual. Así evitas fallas y gastas menos gas.", s:"Mantención profunda", pr:"desde $60.000"},
-    2:{l:"Nivel 2 · Falla", h:"Necesita revisión", p:"Hay una falla en marcha. Conviene revisarlo antes de que se agrave y termine en una reparación mayor.", s:"Visita de diagnóstico", pr:"$20.000"},
-    3:{l:"Nivel 3 · Alto riesgo", h:"Revísalo pronto", p:"Este síntoma puede dañar el equipo y no es seguro. Úsalo lo menos posible hasta que lo revise un técnico autorizado.", s:"Visita de diagnóstico", pr:"$20.000"},
-    4:{l:"Nivel 4 · Urgente", h:"Cierra el gas ahora", p:"Un olor a gas requiere atención inmediata. Sigue los pasos de seguridad y escríbenos.", s:"Visita de diagnóstico", pr:"$20.000"}
+    1:{l:"Mantención preventiva", h:"Toca mantención preventiva", p:"Tu calefón funciona, pero le corresponde su mantención anual: desarme, limpieza y ajuste. Así evitas fallas y gastas menos gas.", s:"", pr:""},
+    "1p":{l:"Mantención profunda", h:"Toca mantención profunda", p:"Por su edad o uso, a tu calefón le conviene una mantención profunda con cambio del kit de piezas que se desgastan.", s:"", pr:""},
+    2:{l:"Nivel 2 · Falla", h:"Necesita revisión", p:"Hay una falla en marcha. Conviene revisarlo antes de que se agrave y termine en una reparación mayor.", s:"Visita técnica", pr:"$20.000"},
+    3:{l:"Nivel 3 · Alto riesgo", h:"Revísalo pronto", p:"Este síntoma puede dañar el equipo y no es seguro. Úsalo lo menos posible hasta que lo revise un técnico autorizado.", s:"Visita técnica", pr:"$20.000"},
+    4:{l:"Nivel 4 · Urgente", h:"Cierra el gas ahora", p:"Un olor a gas requiere atención inmediata. Sigue los pasos de seguridad y escríbenos.", s:"Visita técnica", pr:"$20.000"}
   };
   function update(){
     var sel = SYMPTOMS.filter(function(s){ return el("s-"+s.id).checked; });
     var lvl = sel.reduce(function(m,s){ return Math.max(m,s.lvl); }, 0);
-    var o = OUT[lvl];
+    var plan = sel.some(function(s){return s.plan==="prof";}) ? "prof" : "prev";
+    var o = OUT[lvl===1 && plan==="prof" ? "1p" : lvl];
     res.dataset.level = lvl; res.dataset.gas = sel.some(function(s){return s.id==="gas";}) ? "1" : "0";
     el("r-lvl").textContent = o.l; el("r-title").textContent = o.h; el("r-text").textContent = o.p;
-    var recK = lvl === 0 ? null : (lvl === 1 ? "mant" : "diag");
+    var recK = lvl === 0 ? null : (lvl === 1 ? plan : "diag");
     document.querySelectorAll("#result .rec").forEach(function(r){
       r.classList.toggle("on", r.dataset.k === recK);
       r.classList.toggle("off", !!recK && r.dataset.k !== recK);
     });
     el("r-btn").lastChild.textContent = sel.length ? "Agendar con " + (sel.length>1? "estos síntomas" : "este síntoma") : "Agendar visita";
-    window.__diag = {sel: sel, lvl: lvl};
+    window.__diag = {sel: sel, lvl: lvl, plan: plan};
   }
   box.addEventListener("change", update); update();
   // lleva los síntomas marcados al formulario de agendamiento
   el("r-btn").addEventListener("click", function(){
     var d = window.__diag || {sel: [], lvl: 0}; if (!d.sel.length) return;
-    var radio = el(d.lvl === 1 ? "svc2" : "svc1"); if (radio) radio.checked = true;
+    var radio = el(d.lvl === 1 ? (d.plan === "prof" ? "svc4" : "svc2") : "svc1"); if (radio) radio.checked = true;
     var note = el("b-note"); if (note) note.value = d.sel.map(function(s){ return s.t; }).join(", ");
     var f = el("book"); if (f) f.dispatchEvent(new Event("input", {bubbles: true}));
   });
 
-  // ---------- llama azul (canvas) ----------
-  var cv = document.getElementById("flame"), ctx = cv.getContext("2d");
-  var reduce = false; // la llama se anima siempre, aunque el equipo tenga "reducir movimiento" activado
-  var W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2),mode="ok";
-  function size(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
-  size(); window.addEventListener("resize", size);
-  if (window.ResizeObserver) new ResizeObserver(function(){ size(); if (reduce) still(); }).observe(cv);
-  // vuelve a encender cuando la ventana del calefón entra en pantalla
-  if (window.IntersectionObserver) new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && !reduce) ign0 = -1; }); }, {threshold:.4}).observe(cv);
-  // Hilera de llamas del quemador: encendido con chispa, de izquierda a derecha, luego llama estable
-  var ign0 = -1, N = 12;
-  var J = []; for (var q=0;q<N;q++) J.push({p1:Math.random()*6.28, p2:Math.random()*6.28, s:0.9+Math.random()*0.2});
-  function flamePath(x, base, w, h, sway){
-    ctx.beginPath();
-    ctx.moveTo(x - w/2, base);
-    ctx.bezierCurveTo(x - w*0.62, base - h*0.45, x - w*0.18 + sway*0.5, base - h*0.8, x + sway, base - h);
-    ctx.bezierCurveTo(x + w*0.18 + sway*0.5, base - h*0.8, x + w*0.62, base - h*0.45, x + w/2, base);
-    ctx.closePath();
-  }
-  function frame(now){
-    if (cv.clientWidth !== W || cv.clientHeight !== H) size();
-    if (!W || !H) { ign0 = -1; if (!reduce) requestAnimationFrame(frame); return; }
-    if (ign0 < 0) ign0 = now;
-    var t = ((now - ign0) / 1000) % 10;    // ciclo de 10 s: se abre el agua, enciende, arde y se cierra
-    var tagEl = document.getElementById("f-tag");
-    var st = t < 1.4 ? "ENCENDIENDO…" : (t > 8.8 ? "SE CERRÓ EL AGUA" : (TXT ? TXT[mode].tag : (tagEl ? tagEl.textContent : "")));
-    if (tagEl && tagEl.textContent !== st) tagEl.textContent = st;
-    var bad = mode !== "ok";
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "#03060D"; ctx.fillRect(0, 0, W, H);
-    var base = H * 0.835, x0 = W * 0.17, x1 = W * 0.83, gap = (x1 - x0) / (N - 1);
-    var jetW = gap * 0.78, baseH = H * (bad ? 0.30 : 0.16);
-    var lit = 0;
-    // chispa del electrodo (0.25 s a 0.75 s)
-    if (t > 0.25 && t < 0.75) {
-      ctx.globalCompositeOperation = "lighter";
-      for (var s = 0; s < 3; s++) {
-        var sx = x0 - gap * 0.6 + (Math.random() - .5) * 6, sy = base - 10 - Math.random() * 16;
-        ctx.strokeStyle = "rgba(220,240,255," + (0.5 + Math.random() * .5) + ")"; ctx.lineWidth = 1.4;
-        ctx.beginPath(); ctx.moveTo(x0 - gap * 0.6, base - 4);
-        ctx.lineTo(sx + (Math.random() - .5) * 8, (base + sy) / 2); ctx.lineTo(sx, sy); ctx.stroke();
-      }
-      var fl = ctx.createRadialGradient(x0 - gap * .6, base - 14, 0, x0 - gap * .6, base - 14, 30);
-      fl.addColorStop(0, "rgba(200,230,255,.6)"); fl.addColorStop(1, "rgba(200,230,255,0)");
-      ctx.fillStyle = fl; ctx.fillRect(x0 - gap * .6 - 30, base - 44, 60, 60);
-    }
-    ctx.globalCompositeOperation = "lighter";
-    for (var i = 0; i < N; i++) {
-      var on = (t - 0.6 - i * 0.07) / 0.35;  // cada quemador prende un poco después que el anterior
-      if (on <= 0) continue;
-      var g0 = Math.min(1, on); g0 = 1 - Math.pow(1 - g0, 3);
-      if (t > 8.8) g0 *= Math.max(0, 1 - (t - 8.8 - i * 0.02) / 0.35);
-      if (g0 <= 0.01) continue; lit++;
-      var j = J[i], x = x0 + i * gap, ts = now / 1000;
-      var flick = bad
-        ? 0.75 + 0.35 * Math.sin(ts * 7 + j.p1) * Math.sin(ts * 3.1 + j.p2) + 0.15 * Math.random()
-        : 0.84 + 0.12 * Math.sin(ts * 11 + j.p1) + 0.08 * Math.sin(ts * 17 + j.p2) + 0.06 * Math.random();
-      var h = baseH * j.s * flick * g0;
-      var sway = bad ? Math.sin(ts * 2.2 + j.p1) * jetW * 0.7 : Math.sin(ts * 6 + j.p2) * jetW * 0.2;
-      // halo
-      var halo = ctx.createRadialGradient(x, base - h * .4, 0, x, base - h * .4, h * .9);
-      halo.addColorStop(0, bad ? "rgba(255,150,40,.16)" : "rgba(70,150,255,.16)"); halo.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, base - h * .4, h * .9, 0, 6.283); ctx.fill();
-      // cono exterior
-      var go = ctx.createLinearGradient(0, base, 0, base - h);
-      if (bad) { go.addColorStop(0, "rgba(255,120,30,.85)"); go.addColorStop(.35, "rgba(255,190,60,.75)"); go.addColorStop(1, "rgba(255,90,10,0)"); }
-      else     { go.addColorStop(0, "rgba(40,110,255,.9)");  go.addColorStop(.5, "rgba(60,150,255,.55)"); go.addColorStop(1, "rgba(30,80,220,0)"); }
-      ctx.fillStyle = go; flamePath(x, base, jetW, h, sway); ctx.fill();
-      // cono interior
-      var hi = h * (bad ? 0.35 : 0.42), gi = ctx.createLinearGradient(0, base, 0, base - hi);
-      if (bad) { gi.addColorStop(0, "rgba(255,245,200,.9)"); gi.addColorStop(1, "rgba(255,210,120,0)"); }
-      else     { gi.addColorStop(0, "rgba(210,240,255,.95)"); gi.addColorStop(1, "rgba(120,200,255,0)"); }
-      ctx.fillStyle = gi; flamePath(x, base, jetW * 0.5, hi, sway * 0.4); ctx.fill();
-    }
-    // resplandor sobre el quemador, crece a medida que prenden las llamas
-    if (lit) {
-      var k = lit / N, gc = bad ? "255,170,60" : "110,180,255";
-      ctx.save(); ctx.translate(W / 2, base - 6); ctx.scale(1, 0.32);
-      var gl = ctx.createRadialGradient(0, 0, 0, 0, 0, W * .48);
-      gl.addColorStop(0, "rgba(" + gc + "," + (0.28 * k) + ")"); gl.addColorStop(1, "rgba(" + gc + ",0)");
-      ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(0, 0, W * .48, 0, 6.283); ctx.fill(); ctx.restore();
-    }
-    if (!reduce) requestAnimationFrame(frame);
-  }
-  function still(){ ign0 = 0; frame(5000); }
-  if(reduce){ still(); } else requestAnimationFrame(frame);
-
-  var win=el("win"), bOk=el("b-ok"), bBad=el("b-bad");
-  var TXT={
-    ok:{tag:"LLAMA AZUL · TODO BIEN", col:"AZUL", mean:"QUEMA BIEN EL GAS", note:'Una llama <b>azul</b> significa que el calefón quema bien el gas. Toca "Llama amarilla" para ver cuándo necesita revisión.'},
-    bad:{tag:"LLAMA AMARILLA · REVISAR", col:"AMARILLA", mean:"MALA COMBUSTIÓN", note:'Una llama <b>amarilla o anaranjada</b> indica suciedad o mala combustión: gasta más gas y puede producir monóxido. Agenda una revisión.'}
-  };
-  function setMode(m){
-    mode=m; win.dataset.mode=m; bOk.setAttribute("aria-pressed",m==="ok"); bBad.setAttribute("aria-pressed",m!=="ok");
-    var t=TXT[m]; el("f-tag").textContent=t.tag; el("f-col").textContent=t.col; el("f-mean").textContent=t.mean; el("f-note").innerHTML=t.note;
-    if(reduce) still(); else ign0 = -1;
-  }
-  bOk.addEventListener("click",function(){setMode("ok");}); bBad.addEventListener("click",function(){setMode("bad");});
 })();
 </script>
 </body>
